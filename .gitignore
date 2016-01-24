@@ -50,3 +50,7 @@ Temporary Items
 *.css
 *.css.map
 .sass-cache
+
+#sublime
+*.sublime-project
+*.sublime-workspace
