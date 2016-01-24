@@ -1,0 +1,90 @@
+$font: "Segoe UI Light","Segoe WPC","Segoe UI", Helvetica, Arial, "Arial Unicode MS", Sans-Serif;
+$font_size: 16pt;
+$font_size_header: 32pt;
+
+$color_blue: #0EAFDF;
+$color_red: #f00;
+$color_orange: #E98202;
+
+//usage: @include border-radius(50%);
+@mixin border-radius($radius:5px) 
+{
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+//usage: @include gradiant($color_top, $color_bottom);
+@mixin gradient($start-colour, $end-colour){
+	background-color: $start-colour;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($start-colour), to($end-colour));
+	background-image: -webkit-linear-gradient(top, $start-colour, $end-colour);
+	background-image:    -moz-linear-gradient(top, $start-colour, $end-colour);
+	background-image:     -ms-linear-gradient(top, $start-colour, $end-colour);
+	background-image:      -o-linear-gradient(top, $start-colour, $end-colour);
+	background-image:         linear-gradient(top, $start-colour, $end-colour);
+	filter:            progid:DXImageTransform.Microsoft.gradient(start-colourStr='#{$start-colour}', end-colourStr='#{$end-colour}');
+}
+
+//usage: @include box-sizing(border-box);
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model; // Safari <= 5
+     -moz-box-sizing: $box-model; // Firefox <= 19
+          box-sizing: $box-model;
+}
+
+//usage: @include transition(color .3s ease);
+@mixin transition($args...) {
+	-webkit-transition: $args;
+	   -moz-transition: $args;
+		-ms-transition: $args;
+		 -o-transition: $args;
+			transition: $args;
+}
+
+//usage: @include opacity(0.8);
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: $font;
+	font-size: $font_size;
+	background-color: #efefef;
+}
+
+a, h1, h2, h3
+{
+	font-family: $font;
+}
+
+.wrapper{
+	width: 100%;
+	height: auto;
+}
+
+.error{
+	display: block;
+	background-color: $color_red + 225;
+	border: 1px solid $color_red + 150;
+	padding: 5px;
+}
+
+@media only screen and (min-width: 1024px){
+	.wrapper{
+		width: 80%;
+		margin: 0 auto;
+	}
+}
+
+@import
+		"_partials/header",
+		"_partials/main",
+		"_partials/login"
+;

@@ -1,0 +1,82 @@
+.item{
+	background-color: #FFF;
+	border-top: 1px solid #ADADAD;
+	border-bottom: 1px solid #ADADAD;
+	margin: 20px 0;
+	padding: 0 20px;
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	@include box-sizing(border-box);
+
+	h1{
+		text-align: center;
+	}
+
+	section{
+		h1{
+			text-align: left;
+		}
+	}
+}
+
+#announcements{
+	@include box-sizing(border-box);
+	background-color: #ffb;
+	border-top: 1px solid #ff0;
+	border-bottom: 1px solid #ff0;
+	
+	hr{
+		border: 0;
+		border-top: 1px solid #ff0;
+		margin: 10px 20px;
+	}
+
+	h1, p{
+		margin: 0 20px;
+		padding: 0;
+	}
+}
+
+@media only screen and (min-width: 650px){
+	.item{
+		@include border-radius(20px);
+		border-left: 1px solid #ADADAD;
+		border-right: 1px solid #ADADAD;
+		width: 40%;
+		margin: 20px 0;
+	}
+
+	#announcements{
+		@include border-radius(0px);
+		width: 100%;
+		margin: 20px 0px;
+		padding: 0;
+		border-left: none;
+		border-right: none;
+	}
+
+	#pers_tasks{
+		width: 50%;
+	}
+
+	#pers_appointments{
+		float: right;
+	}
+}
+
+@media only screen and (min-width: 1024px){
+	#announcements{
+		@include border-radius(20px);
+		border-left: 1px solid #ff0;
+		border-right: 1px solid #ff0;
+	}
+}
+
+#pers_appointments{
+	h1{
+		p{
+			margin: 0;
+		}
+	}
+}

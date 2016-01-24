@@ -1,0 +1,140 @@
+header{
+	background-color: $color_blue;
+	min-height: 50px;
+	
+	.logo{
+		color: #fff;
+		width: 100%;
+		text-align: center;
+		display: inline-block;
+		font-size: 24pt;
+		height: 50px;
+		
+		span{
+			color: $color_orange;
+			font-weight: bold;
+		}
+	}
+	
+	nav{
+		display: block;
+		overflow: hidden;
+		max-height: 200px;
+		height: 200px;
+		-webkit-transition: max-height 0.25s linear;
+				transition: max-height 0.25s linear;
+		
+		ul{
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			
+			li{
+				height: 50px;
+				list-style-type: none;
+				background-color: #FFF;
+				border-bottom: 1px solid $color_blue;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				@include box-sizing(border-box);
+				
+				a{
+					display: block;
+					color: black;
+					width: 100%;
+					text-align: center;
+					text-decoration: none;
+					font-family: $font;
+					line-height: 50px;
+					
+				}
+			}
+		}
+	}
+
+	#menuToggle{
+		display: none;
+	}
+
+	#menuToggle:focus{
+		outline:0;
+	}
+}
+
+.javascript-enabled nav{
+	max-height: 0px;
+}
+
+@media only screen and (max-width: 628px){
+	.javascript-enabled nav.open{
+		max-height: 200px;
+		height: 200px;
+	}
+
+	.javascript-enabled nav.closed{
+		max-height: 0px;
+	}
+}
+
+.javascript-enabled #menuToggle{
+	display: inline-block;
+	background-color: transparent;
+	position: absolute;
+	top: -4px;
+	right: 0;
+	border-style: none;
+	height: 50px;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 50px;
+}
+
+@media only screen and (min-width: 629px){
+	header{
+		.logo{
+			width: 229px;
+			display: inline-block;
+			text-align: left;
+			margin: 0;
+			padding: 0;
+		}
+
+		nav, .javascript-enabled nav{
+			margin: 0;
+			padding: 0;
+			height: 50px;
+			max-height: 50px;
+			display: inline-block;
+			overflow: visible;
+			float: right;
+			
+			ul{
+				margin: 0;
+				padding: 0;
+				width: auto;
+				height: 50px;
+				display: block;
+				float: right;
+				li{
+					float: left;
+					display: inline-block;
+					width: auto;
+					background-color: transparent;
+					border: none;
+					padding: 0 10px;
+
+					a{
+						float: left;
+						height: 50px;
+						color: #FFF;
+					}
+				}
+			}
+		}
+	}
+
+	.javascript-enabled #menuToggle{
+		display: none;
+	}
+}
