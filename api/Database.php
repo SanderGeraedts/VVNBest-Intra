@@ -62,16 +62,19 @@ class Database
 		}
 	}
 
-	private function getSenderForMessage($messages){
-		foreach ($messages as $message) {
-			$sql = "SELECT u.Id, u.Name FROM VVN_USER u, MESSAGE m WHERE u.Id = m.UserId AND m.Id = " . $message->id . ";";
+	private function getSenderForMessage($messages_old){
+		$messages = array();
+
+		foreach ($messages_old as $message_old) {
+			$sql = "SELECT u.Id, u.Name FROM VVN_USER u, MESSAGE m WHERE u.Id = m.UserId AND m.Id = " . $message_old->id . ";";
 
 			$command = @mysqli_query($this->conn, $sql);
 
 			if($command) {
 				while($row = mysqli_fetch_array($command)) {
 					$user = new User(array('id'=>$row['Id'], 'name'=>$row['Name']));
-					$message->sender = $user;
+					$message = new Message(array('id'=>$message_old->id, 'date'=>$message_old->date, 'title'=>$message_old->title, 'text'=>$message_old->text, 'sender'=>$user));
+					array_push($messages, $message);
 				}
 			}
 		}
@@ -89,7 +92,7 @@ class Database
 
 		if($command){
 			while($row = mysqli_fetch_array($command)) {
-				$message = new Message(array('id'=>$row['id'], 'date'=>$row['DateSent'], 'title'=>$row['Title'], 'text'=>$row['MessageText']));
+				$message = new Message(array('id'=>$row['Id'], 'date'=>$row['DateSent'], 'title'=>$row['Title'], 'text'=>$row['MessageText']));
 				array_push($messages, $message);
 			}
 		}

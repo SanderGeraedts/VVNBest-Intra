@@ -46,10 +46,6 @@ class Message
 					throw new \InvalidArgumentException("Invalid use of constructor:\n" . $key . " can't be empty");
 				}
 			}
-
-			if(count($this->receivers) == 0){
-				throw new \InvalidArgumentException("Invalid use of constructor:\nrequires atleast one receiver can't be empty");
-			}
 		}
 	}
 }

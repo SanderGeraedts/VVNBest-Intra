@@ -7,9 +7,8 @@ require('view/viewHome.php');
 $view = new viewHome();
 
 $messages = $view->getMessages();
-$tasks = $view->getTasks();
-$agenda = $view->getAgenda();
-
+// $tasks = $view->getTasks();
+// $agenda = $view->getAgenda();
 ?>
 
 <!DOCTYPE html>
@@ -43,27 +42,15 @@ $agenda = $view->getAgenda();
 		<main class="wrapper">
 			<article id="announcements" class="item">
 				<h1>Berichten</h1>
+				<?php foreach ($messages as $message) { ?>
 				<hr>
 				<section class="">
-					<h1><span>22-01-2016: </span><a href="#">Test</a></h1>
+					<h1><span><?php echo $message->date; ?>: </span><a href="#"><?php echo $message->title; ?></a> - <a href="users.php?id=<?php echo $message->sender->id;?>"><?php echo $message->sender->name; ?></a></h1>
 					<p>
-						Lorem ipsum dolor sit amet.
+						<?php echo $message->text; ?>
 					</p>
 				</section>
-				<hr>
-				<section class="">
-					<h1><span>22-01-2016: </span><a href="#">Test</a></h1>
-					<p>
-						Lorem ipsum dolor sit amet.
-					</p>
-				</section>
-				<hr>
-				<section class="">
-					<h1><span>22-01-2016: </span><a href="#">Test</a></h1>
-					<p>
-						Lorem ipsum dolor sit amet.
-					</p>
-				</section>
+				<?php } ?>
 				<br/>
 			</article>
 			<article id="pers_tasks" class="item">
