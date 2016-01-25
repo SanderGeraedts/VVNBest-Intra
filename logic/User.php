@@ -48,5 +48,11 @@ class User
 			}
 		}
 	}
+
+	public static function CheckLogin($username, $password){
+		$database = new Database();
+		$user = $database->CheckLogin($username, $password);
+		return $user;
+	}
 }
 ?>

@@ -3,10 +3,63 @@
 /**
 * 
 */
+
+DEFINE ('DB_USER', 'root');
+DEFINE ('DB_PASSWORD', '');
+DEFINE ('DB_HOST', 'localhost');
+DEFINE ('DB_NAME', 'vvn-intra');
+
 class Database
 {
+	private $conn;
+
 	public function __construct(){
-		
+		$this->conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) OR die('Could not connect to MySQL: ' . mysqli_connect_error());
+	}
+
+	public function __destruct(){
+		mysqli_close($this->conn);
+	}
+
+	private function executeSQL($sql){
+		if($this->conn->query($sql)){
+			return true;
+		}else{
+			echo $sql;
+			return false;
+		}
+	}
+
+	private function sanitate($array) {
+		foreach ($array as $key => $value) {
+			if(is_array($value)) {
+				$this->sanitate($value);
+			}else {
+				$array[$key] = mysqli_real_escape_string($this->conn, $value);
+			}
+			return $array;
+		}
+	}
+
+	public function CheckLogin($username, $password){
+		$username = mysqli_real_escape_string($this->conn, $username);
+		$password = mysqli_real_escape_string($this->conn, $password);
+
+		$sql = "SELECT * FROM VVN_USER WHERE Username = UPPER('" . $username . "') AND Password = '" . $password . "';";
+
+		$command = @mysqli_query($this->conn, $sql);
+
+		if($command){
+			while($row = mysqli_fetch_array($command)) {
+				$user = new User(array('id'=>$row['Id'], 'name'=>$row['Name'], 'username'=>$row['Username'], 'password'=>$row['Password'], 'email'=>$row['Email']));
+			}
+		}
+
+		if(isset($user)) {
+			return $user;
+		}else {
+			return false;
+		}
 	}
 }
 
