@@ -12,9 +12,9 @@ class Message
 	private $sender;
 	private $receivers;
 
-	private $fillable = array('title', 'text');
+	private $fillable = array('title', 'text', 'sender');
 	private $accessible = array('id', 'date', 'title', 'text', 'sender', 'receivers');
-	private $required = array('id', 'date', 'text', 'sender');
+	private $required = array('id', 'date', 'text');
 
 	public function __set ($name, $value) {
 		if (in_array($name, $this->fillable)) {

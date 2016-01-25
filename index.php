@@ -1,4 +1,16 @@
-<?php ?>
+<?php 
+
+session_start();
+
+require('view/viewHome.php');
+
+$view = new viewHome();
+
+$messages = $view->getMessages();
+$tasks = $view->getTasks();
+$agenda = $view->getAgenda();
+
+?>
 
 <!DOCTYPE html>
 

@@ -61,6 +61,42 @@ class Database
 			return false;
 		}
 	}
+
+	private function getSenderForMessage($messages){
+		foreach ($messages as $message) {
+			$sql = "SELECT u.Id, u.Name FROM VVN_USER u, MESSAGE m WHERE u.Id = m.UserId AND m.Id = " . $message->id . ";";
+
+			$command = @mysqli_query($this->conn, $sql);
+
+			if($command) {
+				while($row = mysqli_fetch_array($command)) {
+					$user = new User(array('id'=>$row['Id'], 'name'=>$row['Name']));
+					$message->sender = $user;
+				}
+			}
+		}
+		return $messages;
+	}
+
+	public function getMessagesForUser($id){
+		$id = mysqli_real_escape_string($this->conn, $id);
+
+		$sql = "SELECT * FROM MESSAGE m, MESSAGE_USER u WHERE u.MessageId = m.Id AND u.UserId = " . $id . ";";
+
+		$command = @mysqli_query($this->conn, $sql);
+
+		$messages = array();
+
+		if($command){
+			while($row = mysqli_fetch_array($command)) {
+				$message = new Message(array('id'=>$row['id'], 'date'=>$row['DateSent'], 'title'=>$row['Title'], 'text'=>$row['MessageText']));
+				array_push($messages, $message);
+			}
+		}
+
+		$messages = $this->getSenderForMessage($messages);
+		return $messages;
+	}
 }
 
 ?>

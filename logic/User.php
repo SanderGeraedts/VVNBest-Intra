@@ -13,7 +13,7 @@ class User
 
 	private $fillable = array('name', 'username', 'password', 'email');
 	private $accessible = array('id', 'name', 'username', 'password', 'email');
-	private $required = array('id', 'name', 'username', 'password');
+	private $required = array('id', 'name');
 
 
 	public function __set ($name, $value) {
