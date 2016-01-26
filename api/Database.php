@@ -118,6 +118,24 @@ class Database
 
 		return $tasks;
 	}
+
+	public function getAgendaForUser($id) {
+		$id = mysqli_real_escape_string($this->conn, $id);
+
+		$sql = "SELECT * FROM VVN_EVENT e, USER_EVENT u WHERE e.Id = u.EventId AND u.UserId = " . $id . ";";
+		$command = @mysqli_query($this->conn, $sql);
+
+		$events = array();
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$event = new Event(array('id'=>$row['Id'], 'name'=>$row['Name'], 'date'=>$row['DateEvent'], 'location'=>$row['Location'], 'description'=>$row['Description']));
+				array_push($events, $event);
+			}
+		} 
+		$agenda = new Agenda(array('events'=>$events));
+		return $agenda;
+	}
 }
 
 ?>

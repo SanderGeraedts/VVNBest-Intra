@@ -8,7 +8,7 @@ $view = new viewHome();
 
 $messages = $view->getMessages();
 $tasks = $view->getTasks();
-// $agenda = $view->getAgenda();
+$agenda = $view->getAgenda();
 ?>
 
 <!DOCTYPE html>
@@ -66,18 +66,12 @@ $tasks = $view->getTasks();
 			</article>
 			<article id="pers_appointments" class="item">
 				<h1>Agenda</h1>
+				<?php foreach ($agenda->events as $event) { ?>
 				<hr>
 				<section class="appointment_item">
-					<h1><p>23-01-2016: </p><a href="#">Test</a></h1>
+					<h1><p><?php echo $event->date; ?>: </p><a href="events.php?id=<?php echo $event->id; ?>"><?php echo $event->name; ?></a></h1>
 				</section>
-				<hr>
-				<section class="appointment_item">
-					<h1><p>23-01-2016: </p><a href="#">Test</a></h1>
-				</section>
-				<hr>
-				<section class="appointment_item">
-					<h1><p>23-01-2016: </p><a href="#">Test</a></h1>
-				</section>
+				<?php } ?>
 			</article>
 		</main>
 	</body>

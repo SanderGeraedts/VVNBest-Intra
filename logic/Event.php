@@ -10,7 +10,7 @@ class Event
 	private $date;
 	private $location;
 	private $description;
-	private $files
+	private $files;
 
 	private $fillable = array('name', 'date', 'location', 'description', 'files');
 	private $accessible = array('id', 'name', 'date', 'location', 'description', 'files');

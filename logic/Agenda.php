@@ -5,7 +5,7 @@
 */
 class Agenda
 {
-	private $events
+	private $events;
 
 	private $fillable = array('events');
 	private $accessible = array('events');
