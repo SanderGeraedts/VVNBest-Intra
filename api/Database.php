@@ -100,6 +100,24 @@ class Database
 		$messages = $this->getSenderForMessage($messages);
 		return $messages;
 	}
+
+	public function getTasksForUser($id) {
+		$id = mysqli_real_escape_string($this->conn, $id);
+
+		$sql = "SELECT * FROM TASK WHERE UserId = " . $id . ";";
+		$command = @mysqli_query($this->conn, $sql);
+
+		$tasks = array();
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$task = new Task(array('id'=>$row['Id'], 'name'=>$row['Name'], 'description'=>$row['Description'], 'deadline'=>$row['Deadline']));
+				array_push($tasks, $task);
+			}
+		}
+
+		return $tasks;
+	}
 }
 
 ?>

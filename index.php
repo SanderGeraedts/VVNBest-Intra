@@ -7,7 +7,7 @@ require('view/viewHome.php');
 $view = new viewHome();
 
 $messages = $view->getMessages();
-// $tasks = $view->getTasks();
+$tasks = $view->getTasks();
 // $agenda = $view->getAgenda();
 ?>
 
@@ -55,12 +55,14 @@ $messages = $view->getMessages();
 			</article>
 			<article id="pers_tasks" class="item">
 				<h1>Persoonlijke taken</h1>
+				<?php foreach ($tasks as $task) { ?>
 				<section class="task_item">
-					<h1><a href="#">Test</a></h1>
+					<h1><a href="tasks.php?id=<?php echo $task->id ?>"><?php echo $task->name ?></a></h1>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis reprehenderit voluptatem, ullam obcaecati quis. Molestiae consectetur, molestias itaque. Quasi exercitationem eaque sunt! Voluptas eos, autem officia ea perspiciatis error quaerat.
+						<?php echo $task->description ?>
 					</p>
 				</section>
+				<?php } ?>
 			</article>
 			<article id="pers_appointments" class="item">
 				<h1>Agenda</h1>

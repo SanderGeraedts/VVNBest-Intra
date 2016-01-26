@@ -3,6 +3,7 @@
 require('logic/User.php');
 require('api/Database.php');
 require('logic/Message.php');
+require('logic/Task.php');
 
 class viewHome{
 	private $loggedIn;
