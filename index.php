@@ -18,7 +18,7 @@ $agenda = $view->getAgenda();
 		<title>VVNBest Intra</title>
 		<link href="assets/css/style.css" rel = stylesheet />
 		<link href="assets/img/favicon.png" rel="shortcut icon">
-		<meta name="description" content="XO backend app">
+		<meta name="description" content="Intranet oplossing voor VVNBest">
 		<meta name="author" content="Code Panda - www.codepanda.nl">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
@@ -31,10 +31,11 @@ $agenda = $view->getAgenda();
 				<button id="menuToggle"><img src="assets/img/hamburger.png" alt="Menu knop"></button>
 				<nav id="navigation">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Vergadering</a></li>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="events.php">Vergadering &amp Acties</a></li>
 						<li><a href="#">Bestanden</a></li>
 						<li><a href="#">Taken</a></li>
+						<li><a href="http://www.vvnbest.nl/roundcube">Webmail</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -56,6 +57,7 @@ $agenda = $view->getAgenda();
 			<article id="pers_tasks" class="item">
 				<h1>Persoonlijke taken</h1>
 				<?php foreach ($tasks as $task) { ?>
+				<hr>
 				<section class="task_item">
 					<h1><a href="tasks.php?id=<?php echo $task->id ?>"><?php echo $task->name ?></a></h1>
 					<p>

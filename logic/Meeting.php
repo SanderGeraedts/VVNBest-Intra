@@ -3,13 +3,20 @@
 /**
 * 
 */
-class Meeting extends Event
-{
+class Meeting {
+	
+	private $id;
+	private $name;
+	private $date;
+	private $location;
+	private $description;
+	private $files;
 	private $previous_meeting;
 	private $items;
 
-	private static $fillable = array('previous_meeting', 'items');
-	private static $accessible = array('previous_meeting', 'items');
+	private $fillable = array('name', 'date', 'location', 'description', 'files', 'previous_meeting', 'items');
+	private $accessible = array('id', 'name', 'date', 'location', 'description', 'files', 'previous_meeting', 'items');
+	private $required = array('id', 'name', 'date');
 
 	public function __set ($name, $value) {
 		if (in_array($name, $this->fillable)) {
@@ -31,9 +38,6 @@ class Meeting extends Event
 	}
 
 	public function __construct(Array $params = array()){
-		$this->fillable = array_merge(parent::$fillable, this->fillable);
-		$this->fillable = array_merge(parent::$accessible, this->accessible);
-
 		if(count($params) > 0){
 			foreach ($params as $key => $value) {
 				$this->$key = $value;

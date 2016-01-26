@@ -81,7 +81,25 @@ class Database
 		return $messages;
 	}
 
-	public function getMessagesForUser($id){
+	public function getMessages() {
+		$sql = "SELECT * FROM MESSAGE;";
+
+		$command = @mysqli_query($this->conn, $sql);
+
+		$messages = array();
+
+		if($command){
+			while($row = mysqli_fetch_array($command)) {
+				$message = new Message(array('id'=>$row['Id'], 'date'=>$row['DateSent'], 'title'=>$row['Title'], 'text'=>$row['MessageText']));
+				array_push($messages, $message);
+			}
+		}
+
+		$messages = $this->getSenderForMessage($messages);
+		return $messages;
+	}
+
+	public function getMessagesForUser($id) {
 		$id = mysqli_real_escape_string($this->conn, $id);
 
 		$sql = "SELECT * FROM MESSAGE m, MESSAGE_USER u WHERE u.MessageId = m.Id AND u.UserId = " . $id . ";";
@@ -99,6 +117,22 @@ class Database
 
 		$messages = $this->getSenderForMessage($messages);
 		return $messages;
+	}
+
+	public function getTasks() {
+		$sql = "SELECT * FROM TASK;";
+		$command = @mysqli_query($this->conn, $sql);
+
+		$tasks = array();
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$task = new Task(array('id'=>$row['Id'], 'name'=>$row['Name'], 'description'=>$row['Description'], 'deadline'=>$row['Deadline']));
+				array_push($tasks, $task);
+			}
+		}
+
+		return $tasks;
 	}
 
 	public function getTasksForUser($id) {
@@ -135,6 +169,72 @@ class Database
 		} 
 		$agenda = new Agenda(array('events'=>$events));
 		return $agenda;
+	}
+
+	public function getMeetings() {
+		$sql = "SELECT * FROM VVN_EVENT e, MEETING m WHERE e.Id = m.EventId;";
+		$command = @mysqli_query($this->conn, $sql);
+
+		$meetings = array();
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$meeting = new Meeting(array('id'=>$row['Id'], 'name'=>$row['Name'], 'date'=>$row['DateEvent'], 'location'=>$row['Location'], 'description'=>$row['Description']));
+				array_push($meetings, $meeting);
+			}
+		}
+
+		return $meetings;
+	}
+
+	public function getEvents() {
+		$sql = "SELECT e.* FROM VVN_EVENT e LEFT JOIN MEETING m ON e.Id = m.EventId WHERE m.EventId IS NULL;";
+		$command = @mysqli_query($this->conn, $sql);
+
+		$events = array();
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$event = new Event(array('id'=>$row['Id'], 'name'=>$row['Name'], 'date'=>$row['DateEvent'], 'location'=>$row['Location'], 'description'=>$row['Description']));
+				array_push($events, $event);
+			}
+		}
+
+		return $events;
+	}
+
+	public function getNumberOfFiles($id){
+		$id = mysqli_real_escape_string($this->conn, $id);
+		$sql = "SELECT COUNT(*) as Result FROM FILE WHERE EventId = " . $id . ";";
+
+		$command = @mysqli_query($this->conn, $sql);
+
+		$result = 0;
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$result = $row['Result'];
+			}
+		}
+
+		return $result;
+	}
+
+	public function getNumberOfItems($id){
+		$id = mysqli_real_escape_string($this->conn, $id);
+		$sql = "SELECT COUNT(*) as Result FROM MEETINGITEM WHERE MeetingId = " . $id . ";";
+
+		$command = @mysqli_query($this->conn, $sql);
+
+		$result = 0;
+
+		if($command) {
+			while($row = mysqli_fetch_array($command)) {
+				$result = $row['Result'];
+			}
+		}
+
+		return $result;
 	}
 }
 

@@ -1,0 +1,25 @@
+#meetings, #events{
+	width: 100%;
+	@include border-radius(0px);
+	
+	h1{
+		margin: 5px;
+	}
+	section{
+		margin: 10px 0;
+		
+		span{
+			display: block;
+		}
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	#meetings, #events {
+		section{
+			span{
+				display: inline;
+			}
+		}
+	}
+}
