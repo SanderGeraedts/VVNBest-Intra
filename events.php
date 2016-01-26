@@ -47,7 +47,7 @@ $events = $view->getEvents();
 					<span class="meeting_link"><a href="events.php?id=<?php echo $meeting->id; ?>">Link</a></span>
 					<span class="meeting_date">Datum: <?php echo $meeting->date; ?></span>
 					<span class="meeting_files"><a href="files.php?eventid=<?php echo $meeting->id; ?>">Bestanden:</a> <?php echo $view->getNumberOfFiles($meeting->id); ?></span>
-					<span class="meeting_points">Bespreekpunten: <?php $view->getNumberOfItems($meeting->id); ?></span>
+					<span class="meeting_points">Bespreekpunten: <?php echo $view->getNumberOfItems($meeting->id); ?></span>
 				</section>
 				<?php } ?>
 			</article>
