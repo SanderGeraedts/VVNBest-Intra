@@ -1,12 +1,13 @@
 <?php 
 
 /**
- * class: 		viewEvents
- * description:	The view controller responsible for the events page. Checks if the user is logged in before loading the page.
- * methods:
- * getMessages:	Returns an array of Message Objects for the logged in user. For more info on the Message Object, go to /../logic/Message.php
- * getTasks:	Returns an array of Task Objects for the logged in user. For more info on the Task Object, go to /../logic/Task.php
- * getAgenda: 	Returns the Agenda Object for the logged in user. For more info on the Agenda Object, go to /../logic/Agenda.php 
+ * class: 				viewEvents
+ * description:			The view controller responsible for the events page. Checks if the user is logged in before loading the page.
+ * -methods-
+ * getMeetings:			Returns an array of all the Meeting Objects in the Database. For more info on the Meeting Object, go to /../logic/Meeting.php
+ * getEvents:			Returns an array of all the Event Objects in the Database. For more info on the Event Object, go to /../logic/Event.php
+ * getNumberOfFiles:	Returns the number of files linked to a given Meeting or Event.
+ * getNumberOfItems:	Returns the number of MeetingItems linked to a given Meeting.
  */
 
 require('logic/User.php');

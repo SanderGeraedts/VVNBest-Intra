@@ -44,10 +44,17 @@ $events = $view->getEvents();
 				<h1>Vergaderingen:</h1>
 				<?php foreach($meetings as $meeting) { ?>
 				<section class="meeting">
-					<span class="meeting_link"><a href="events.php?id=<?php echo $meeting->id; ?>">Link</a></span>
+					<span class="meeting_link">
+						<a href="events.php?id=<?php echo $meeting->id; ?>">Link</a>
+					</span>
 					<span class="meeting_date">Datum: <?php echo $meeting->date; ?></span>
-					<span class="meeting_files"><a href="files.php?eventid=<?php echo $meeting->id; ?>">Bestanden:</a> <?php echo $view->getNumberOfFiles($meeting->id); ?></span>
-					<span class="meeting_points">Bespreekpunten: <?php echo $view->getNumberOfItems($meeting->id); ?></span>
+					<span class="meeting_files">
+						<a href="files.php?eventid=<?php echo $meeting->id; ?>">Bestanden:</a>
+						 <?php echo $view->getNumberOfFiles($meeting->id); ?>
+					</span>
+					<span class="meeting_points">
+						Bespreekpunten: <?php echo $view->getNumberOfItems($meeting->id); ?>
+					</span>
 				</section>
 				<?php } ?>
 			</article>
@@ -55,10 +62,15 @@ $events = $view->getEvents();
 				<h1>Acties</h1>
 				<?php foreach($events as $event) { ?>
 				<section class="event">
-					<span class="event_link"><a href="events.php?id=<?php echo $event->id; ?>">Link</a></span>
+					<span class="event_link">
+						<a href="events.php?id=<?php echo $event->id; ?>">Link</a>
+					</span>
 					<span class="event_date">Datum: <?php echo $event->date; ?></span>
 					<span class="event_title">Naam: <?php echo $event->name; ?></span>
-					<span class="event_files"><a href="files.php?eventid=<?php echo $event->id; ?>">Bestanden:</a> <?php echo $view->getNumberOfFiles(); ?></span>
+					<span class="event_files">
+						<a href="files.php?eventid=<?php echo $event->id; ?>">Bestanden:</a>
+						 <?php echo $view->getNumberOfFiles($event->id); ?>
+					</span>
 				</section>
 				<?php } ?>
 			</article>

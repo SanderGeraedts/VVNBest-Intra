@@ -3,7 +3,7 @@
 /**
  * class: 		viewHome
  * description:	The view controller responsible for the homepage. Checks if the user is logged in before loading the page.
- * methods:
+ * -methods-
  * getMessages:	Returns an array of Message Objects for the logged in user. For more info on the Message Object, go to /../logic/Message.php
  * getTasks:	Returns an array of Task Objects for the logged in user. For more info on the Task Object, go to /../logic/Task.php
  * getAgenda: 	Returns the Agenda Object for the logged in user. For more info on the Agenda Object, go to /../logic/Agenda.php 
